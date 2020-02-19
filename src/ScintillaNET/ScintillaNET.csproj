@@ -89,9 +89,6 @@
     <Content Include="x86\SciLexer.lib" PackagePath="lib\any\x86\" />
     <None Include="$(SolutionDir)\..\LICENSE" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
