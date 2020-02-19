@@ -4,7 +4,7 @@
     <!--Package fields-->
     <Authors>Fernando Andreu;Jacob Slusser</Authors>
     <VersionPrefix>4.0.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionSuffix>pre-alpha</VersionSuffix>
     <PackageId>fernandreu.ScintillaNET</PackageId>
     <AssemblyTitle>ScintillaNET Source Editing Component</AssemblyTitle>
     <Title>ScintillaNET Source Editing Component</Title>
