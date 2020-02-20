@@ -2,13 +2,16 @@
 
   <PropertyGroup>
     <!--Package fields-->
-    <Authors>Fernando Andreu;Jacob Slusser</Authors>
+    <Authors>Fernando Andreu</Authors>
     <VersionPrefix>4.0.0</VersionPrefix>
-    <VersionSuffix>pre-alpha</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
     <PackageId>fernandreu.ScintillaNET</PackageId>
     <AssemblyTitle>ScintillaNET Source Editing Component</AssemblyTitle>
     <Title>ScintillaNET Source Editing Component</Title>
-    <Copyright>Copyright (c) 2018, Jacob Slusser. All rights reserved.</Copyright>
+    <Copyright>
+      Copyright (c) 2020 Fernando Andreu
+      Copyright (c) 2018 Jacob Slusser
+    </Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Language>en-US</Language>
     <PackageTags>ScintillaNET Scintilla Editor</PackageTags>
