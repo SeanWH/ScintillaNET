@@ -20,7 +20,11 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/fernandreu/ScintillaNET</RepositoryUrl>
-    <Description>A Windows Forms control, wrapper, and bindings for the Scintilla text editor.</Description>
+    <Description>
+      A Windows Forms control, wrapper, and bindings for the Scintilla text editor. This is a
+      fork of the original project by Jacob Slusser which targets both .NET Framework 4.6.1 and
+      .NET Core 3.1
+    </Description>
     <Summary>A Windows Forms control, wrapper, and bindings for the Scintilla text editor.</Summary>
 
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -76,20 +80,20 @@
     <EmbeddedResource Include="x86\SciLexer.dll.gz" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x64\License.txt" PackagePath="lib\any\x64\" />
-    <Content Include="x64\SciLexer.dll" PackagePath="lib\any\x64\" />
-    <Content Include="x64\SciLexer.pdb" PackagePath="lib\any\x64\" />
-    <Content Include="x64\version.txt" PackagePath="lib\any\x64\" />
-    <Content Include="x86\License.txt" PackagePath="lib\any\x86\" />
-    <Content Include="x86\version.txt" PackagePath="lib\any\x86\" />
-    <Content Include="x86\SciLexer.dll" PackagePath="lib\any\x86\" />
-    <Content Include="x86\SciLexer.pdb" PackagePath="lib\any\x86\" />
+    <Content Include="x64\License.txt" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x64\SciLexer.dll" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x64\SciLexer.pdb" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x64\version.txt" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x86\License.txt" PackagePath="runtimes\win-x86\native\" />
+    <Content Include="x86\version.txt" PackagePath="runtimes\win-x86\native\" />
+    <Content Include="x86\SciLexer.dll" PackagePath="runtimes\win-x86\native\" />
+    <Content Include="x86\SciLexer.pdb" PackagePath="runtimes\win-x86\native\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x64\SciLexer.exp" PackagePath="lib\any\x64\" />
-    <Content Include="x64\SciLexer.lib" PackagePath="lib\any\x64\" />
-    <Content Include="x86\SciLexer.exp" PackagePath="lib\any\x86\" />
-    <Content Include="x86\SciLexer.lib" PackagePath="lib\any\x86\" />
+    <Content Include="x64\SciLexer.exp" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x64\SciLexer.lib" PackagePath="runtimes\win-x64\native\" />
+    <Content Include="x86\SciLexer.exp" PackagePath="runtimes\win-x86\native\" />
+    <Content Include="x86\SciLexer.lib" PackagePath="runtimes\win-x86\native\" />
     <None Include="$(SolutionDir)\..\LICENSE" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
