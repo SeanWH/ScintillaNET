@@ -88,7 +88,7 @@
     <Content Include="x86\SciLexer.exp" PackagePath="runtimes\win-x86\native\" />
     <Content Include="x86\SciLexer.lib" PackagePath="runtimes\win-x86\native\" />
     <None Include="x86\SciLexer.pdb"/>
-    <None Include="$(SolutionDir)\..\LICENSE" Pack="true" Visible="false" PackagePath="" />
+    <None Include="..\..\LICENSE" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
