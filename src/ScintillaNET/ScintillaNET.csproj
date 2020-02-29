@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!--Package fields-->
     <Authors>Fernando Andreu</Authors>
-    <VersionPrefix>4.0.3</VersionPrefix>
+    <VersionPrefix>4.0.4</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <PackageId>fernandreu.ScintillaNET</PackageId>
     <AssemblyTitle>ScintillaNET Source Editing Component</AssemblyTitle>

@@ -11,7 +11,7 @@ namespace FlagsEnumTypeConverter
 	/// <summary>
 	/// Flags enumeration type converter.
 	/// </summary>
-	internal class FlagsEnumConverter: EnumConverter
+	public class FlagsEnumConverter: EnumConverter
 	{
 		/// <summary>
 		/// This class represents an enumeration field in the property grid.
