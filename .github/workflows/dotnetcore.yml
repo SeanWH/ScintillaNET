@@ -18,7 +18,10 @@ jobs:
         dotnet-version: 3.1.102
     - name: Run tests
       run: dotnet test src/ScintillaNET.Tests/ScintillaNET.Tests.csproj --configuration Release
-    - name: Publish NuGet
-      uses: rohith/publish-nuget@v2.1.0
-      with:
-        PROJECT_FILE_PATH: src/ScintillaNET/ScintillaNET.csproj
+    - name: Generate NuGet package
+      run: dotnet pack src/ScintillaNET/ScintillaNET.csproj --configuration Release -o nupkg
+    - name: Upload package
+      run: find . -name *.nupkg -type f -print0 | xargs -0 -I pkg dotnet nuget push pkg -k $nuget_api_key -s "https://api.nuget.org/v3/index.json" --skip-duplicate
+      env:
+        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+      shell: bash
