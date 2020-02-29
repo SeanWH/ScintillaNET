@@ -21,7 +21,7 @@ jobs:
       run: dotnet test src/ScintillaNET.Tests/ScintillaNET.Tests.csproj --configuration Release
       
     - name: Generate NuGet package
-      run: dotnet pack src/ScintillaNET/ScintillaNET.csproj --configuration Release -o nupkg
+      run: dotnet pack ScintillaNET.csproj --configuration Release -o nupkg
       working-directory: src/ScintillaNET
       
     - name: Upload package
