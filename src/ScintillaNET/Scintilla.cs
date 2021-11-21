@@ -954,7 +954,7 @@ namespace ScintillaNET
                 // Extract the embedded SciLexer DLL
                 // http://stackoverflow.com/a/768429/2073621
                 var version = typeof(Scintilla).Assembly.GetName().Version.ToString(3);
-                modulePath = Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.GetTempPath(), "ScintillaNET"), version), (IntPtr.Size == 4 ? "x86" : "x64")), "SciLexer.dll");
+                modulePath = Path.Combine(Path.GetTempPath(), "ScintillaNET", version, GetRuntimeFolder(), "SciLexer.dll");
 
                 if (!File.Exists(modulePath))
                 {
@@ -995,7 +995,7 @@ namespace ScintillaNET
                                 if (!Directory.Exists(directory))
                                     Directory.CreateDirectory(directory);
 
-                                var resource = string.Format(CultureInfo.InvariantCulture, "ScintillaNET.{0}.SciLexer.dll.gz", (IntPtr.Size == 4 ? "x86" : "x64"));
+                                var resource = string.Format(CultureInfo.InvariantCulture, "ScintillaNET.{0}.SciLexer.dll.gz", GetRuntimeFolder());
                                 using (var resourceStream = typeof(Scintilla).Assembly.GetManifestResourceStream(resource))
                                 using (var gzipStream = new GZipStream(resourceStream, CompressionMode.Decompress))
                                 using (var fileStream = File.Create(modulePath))
@@ -1012,6 +1012,21 @@ namespace ScintillaNET
             }
 
             return modulePath;
+        }
+
+        private static string GetRuntimeFolder()
+        {
+            switch (RuntimeInformation.OSArchitecture)
+            {
+                case Architecture.X64:
+                    return "x64";
+                case Architecture.X86:
+                    return "x86";
+                case Architecture.Arm64:
+                    return "arm64";
+                default:
+                    throw new PlatformNotSupportedException($"ScintillaNET is not supported on {RuntimeInformation.OSArchitecture}");
+            }
         }
 
         /// <summary>
