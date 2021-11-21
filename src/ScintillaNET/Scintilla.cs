@@ -1016,7 +1016,7 @@ namespace ScintillaNET
 
         private static string GetRuntimeFolder()
         {
-            switch (RuntimeInformation.OSArchitecture)
+            switch (RuntimeInformation.ProcessArchitecture)
             {
                 case Architecture.X64:
                     return "x64";
@@ -3760,6 +3760,12 @@ namespace ScintillaNET
 
                     // Get the native Scintilla direct function -- the only function the library exports
                     var directFunctionPointer = NativeMethods.GetProcAddress(new HandleRef(this, moduleHandle), "Scintilla_DirectFunction");
+                    if (directFunctionPointer == IntPtr.Zero)
+                    {
+                        // See https://github.com/jacobslusser/ScintillaNET/issues/424
+                        directFunctionPointer = NativeMethods.GetProcAddress(new HandleRef(this, moduleHandle), "_Scintilla_DirectFunction@16");
+                    }
+
                     if (directFunctionPointer == IntPtr.Zero)
                     {
                         var message = "The Scintilla module has no export for the 'Scintilla_DirectFunction' procedure.";
