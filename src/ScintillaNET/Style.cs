@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using ScintillaNET.Collections;
+using ScintillaNET.Enums;
 
 namespace ScintillaNET
 {

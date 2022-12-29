@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ScintillaNET.Collections;
+using ScintillaNET.Enums;
 
 namespace ScintillaNET
 {
@@ -143,7 +145,14 @@ namespace ScintillaNET
         /// <summary>
         /// Toggles the folding state of the line; expanding or contracting all child lines.
         /// </summary>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <remarks>The line must be set as a <see cref="ScintillaNET.FoldLevelFlags.Header" />.</remarks>
+After:
+        /// <remarks>The line must be set as a <see cref="FoldLevelFlags.Header" />.</remarks>
+*/
+        /// <remarks>The line must be set as a <see cref="Enums.FoldLevelFlags.Header" />.</remarks>
         /// <seealso cref="ToggleFoldShowText"/>
         public void ToggleFold()
         {
@@ -395,7 +404,14 @@ namespace ScintillaNET
 
         /// <summary>
         /// Gets the zero-based line index of the first line before the current line that is marked as
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <see cref="ScintillaNET.FoldLevelFlags.Header" /> and has a <see cref="FoldLevel" /> less than the current line.
+After:
+        /// <see cref="FoldLevelFlags.Header" /> and has a <see cref="FoldLevel" /> less than the current line.
+*/
+        /// <see cref="Enums.FoldLevelFlags.Header" /> and has a <see cref="FoldLevel" /> less than the current line.
         /// </summary>
         /// <returns>The zero-based line index of the fold parent if present; otherwise, -1.</returns>
         public int FoldParent

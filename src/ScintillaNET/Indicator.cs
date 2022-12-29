@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using ScintillaNET.Collections;
+using ScintillaNET.Enums;
 
 namespace ScintillaNET
 {
@@ -176,7 +178,7 @@ namespace ScintillaNET
         /// Gets or sets the indicator style used when the mouse or caret is over an indicator.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.IndicatorStyle" /> enumeration values.
+        /// One of the <see cref="Enums.IndicatorStyle" /> enumeration values.
         /// By default, the hover style is equal to the regular <see cref="Style" />.
         /// </returns>
         /// <remarks>Changing the <see cref="Style" /> property will reset the <see cref="HoverStyle" />.</remarks>
@@ -223,7 +225,7 @@ namespace ScintillaNET
         /// <summary>
         /// Gets or sets the indicator style.
         /// </summary>
-        /// <returns>One of the <see cref="ScintillaNET.IndicatorStyle" /> enumeration values. The default varies.</returns>
+        /// <returns>One of the <see cref="Enums.IndicatorStyle" /> enumeration values. The default varies.</returns>
         /// <remarks>Changing the <see cref="Style" /> property will reset the <see cref="HoverStyle" />.</remarks>
         /// <seealso cref="HoverStyle" />
         public IndicatorStyle Style

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,13 +6,15 @@ using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using ScintillaNET.Collections;
+using ScintillaNET.Enums;
+using ScintillaNET.EventArgs;
 
 namespace ScintillaNET
 {
@@ -1489,9 +1490,9 @@ namespace ScintillaNET
         /// Raises the <see cref="AutoCCancelled" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnAutoCCancelled(EventArgs e)
+        protected virtual void OnAutoCCancelled(System.EventArgs e)
         {
-            var handler = Events[autoCCancelledEventKey] as EventHandler<EventArgs>;
+            var handler = Events[autoCCancelledEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1500,9 +1501,9 @@ namespace ScintillaNET
         /// Raises the <see cref="AutoCCharDeleted" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnAutoCCharDeleted(EventArgs e)
+        protected virtual void OnAutoCCharDeleted(System.EventArgs e)
         {
-            var handler = Events[autoCCharDeletedEventKey] as EventHandler<EventArgs>;
+            var handler = Events[autoCCharDeletedEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1555,7 +1556,7 @@ namespace ScintillaNET
         /// Raises the <see cref="BorderStyleChanged" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnBorderStyleChanged(EventArgs e)
+        protected virtual void OnBorderStyleChanged(System.EventArgs e)
         {
             var handler = Events[borderStyleChangedEventKey] as EventHandler;
             if (handler != null)
@@ -1632,7 +1633,7 @@ namespace ScintillaNET
         /// Raises the HandleCreated event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected unsafe override void OnHandleCreated(EventArgs e)
+        protected unsafe override void OnHandleCreated(System.EventArgs e)
         {
             // Set more intelligent defaults...
             InitDocument();
@@ -1761,9 +1762,9 @@ namespace ScintillaNET
         /// Raises the <see cref="ModifyAttempt" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnModifyAttempt(EventArgs e)
+        protected virtual void OnModifyAttempt(System.EventArgs e)
         {
-            var handler = Events[modifyAttemptEventKey] as EventHandler<EventArgs>;
+            var handler = Events[modifyAttemptEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1806,9 +1807,9 @@ namespace ScintillaNET
         /// Raises the <see cref="Painted" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnPainted(EventArgs e)
+        protected virtual void OnPainted(System.EventArgs e)
         {
-            var handler = Events[paintedEventKey] as EventHandler<EventArgs>;
+            var handler = Events[paintedEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1817,9 +1818,9 @@ namespace ScintillaNET
         /// Raises the <see cref="SavePointLeft" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnSavePointLeft(EventArgs e)
+        protected virtual void OnSavePointLeft(System.EventArgs e)
         {
-            var handler = Events[savePointLeftEventKey] as EventHandler<EventArgs>;
+            var handler = Events[savePointLeftEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1828,9 +1829,9 @@ namespace ScintillaNET
         /// Raises the <see cref="SavePointReached" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnSavePointReached(EventArgs e)
+        protected virtual void OnSavePointReached(System.EventArgs e)
         {
-            var handler = Events[savePointReachedEventKey] as EventHandler<EventArgs>;
+            var handler = Events[savePointReachedEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1861,9 +1862,9 @@ namespace ScintillaNET
         /// Raises the <see cref="ZoomChanged" /> event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnZoomChanged(EventArgs e)
+        protected virtual void OnZoomChanged(System.EventArgs e)
         {
-            var handler = Events[zoomChangedEventKey] as EventHandler<EventArgs>;
+            var handler = Events[zoomChangedEventKey] as EventHandler<System.EventArgs>;
             if (handler != null)
                 handler(this, e);
         }
@@ -1922,12 +1923,19 @@ namespace ScintillaNET
         /// Retrieves the data type of the specified property name for the current <see cref="Lexer" />.
         /// </summary>
         /// <param name="name">A property name supported by the current <see cref="Lexer" />.</param>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <returns>One of the <see cref="PropertyType" /> enumeration values. The default is <see cref="ScintillaNET.PropertyType.Boolean" />.</returns>
+After:
+        /// <returns>One of the <see cref="PropertyType" /> enumeration values. The default is <see cref="PropertyType.Boolean" />.</returns>
+*/
+        /// <returns>One of the <see cref="PropertyType" /> enumeration values. The default is <see cref="Enums.PropertyType.Boolean" />.</returns>
         /// <remarks>A list of supported property names for the current <see cref="Lexer" /> can be obtained by calling <see cref="PropertyNames" />.</remarks>
         public unsafe PropertyType PropertyType(string name)
         {
             if (String.IsNullOrEmpty(name))
-                return ScintillaNET.PropertyType.Boolean;
+                return Enums.PropertyType.Boolean;
 
             var bytes = Helpers.GetBytes(name, Encoding.ASCII, zeroTerminated: true);
             fixed (byte* bp = bytes)
@@ -2162,7 +2170,7 @@ namespace ScintillaNET
 
                 // For backward compatibility.... Of course this means that we'll raise two
                 // TextChanged events for replace (insert/delete) operations, but that's life.
-                OnTextChanged(EventArgs.Empty);
+                OnTextChanged(System.EventArgs.Empty);
             }
 
             if ((scn.modificationType & NativeMethods.SC_MOD_CHANGEANNOTATION) > 0)
@@ -2727,7 +2735,7 @@ namespace ScintillaNET
                 switch (scn.nmhdr.code)
                 {
                     case NativeMethods.SCN_PAINTED:
-                        OnPainted(EventArgs.Empty);
+                        OnPainted(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_MODIFIED:
@@ -2735,7 +2743,7 @@ namespace ScintillaNET
                         break;
 
                     case NativeMethods.SCN_MODIFYATTEMPTRO:
-                        OnModifyAttempt(EventArgs.Empty);
+                        OnModifyAttempt(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_STYLENEEDED:
@@ -2743,11 +2751,11 @@ namespace ScintillaNET
                         break;
 
                     case NativeMethods.SCN_SAVEPOINTLEFT:
-                        OnSavePointLeft(EventArgs.Empty);
+                        OnSavePointLeft(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_SAVEPOINTREACHED:
-                        OnSavePointReached(EventArgs.Empty);
+                        OnSavePointReached(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_MARGINCLICK:
@@ -2772,11 +2780,11 @@ namespace ScintillaNET
                         break;
 
                     case NativeMethods.SCN_AUTOCCANCELLED:
-                        OnAutoCCancelled(EventArgs.Empty);
+                        OnAutoCCancelled(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_AUTOCCHARDELETED:
-                        OnAutoCCharDeleted(EventArgs.Empty);
+                        OnAutoCCharDeleted(System.EventArgs.Empty);
                         break;
 
                     case NativeMethods.SCN_DWELLSTART:
@@ -2807,7 +2815,7 @@ namespace ScintillaNET
                         break;
 
                     case NativeMethods.SCN_ZOOM:
-                        OnZoomChanged(EventArgs.Empty);
+                        OnZoomChanged(System.EventArgs.Empty);
                         break;
 
                     default:
@@ -3339,13 +3347,27 @@ namespace ScintillaNET
         /// Gets or sets the automatic folding flags.
         /// </summary>
         /// <returns>
-        /// A bitwise combination of the <see cref="ScintillaNET.AutomaticFold" /> enumeration.
+        /// A bitwise combination of the <see cref="Enums.AutomaticFold" /> enumeration.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
+        /// The default is <see cref="ScintillaNET.AutomaticFold.None" />.
+After:
+        /// The default is <see cref="AutomaticFold.None" />.
+*/
         /// The default is <see cref="ScintillaNET.AutomaticFold.None" />.
         /// </returns>
         [DefaultValue(AutomaticFold.None)]
         [Category("Behavior")]
         [Description("Options for allowing the control to automatically handle folding.")]
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         [TypeConverter(typeof(FlagsEnumTypeConverter.FlagsEnumConverter))]
+After:
+        [TypeConverter(typeof(FlagsEnumConverter))]
+*/
+        [TypeConverter(typeof(ScintillaNET.TypeConverters.FlagsEnumConverter))]
         public AutomaticFold AutomaticFold
         {
             get
@@ -3433,7 +3455,7 @@ namespace ScintillaNET
 
                     borderStyle = value;
                     UpdateStyles();
-                    OnBorderStyleChanged(EventArgs.Empty);
+                    OnBorderStyleChanged(System.EventArgs.Empty);
                 }
             }
         }
@@ -3695,8 +3717,15 @@ namespace ScintillaNET
         /// Gets or sets the caret display style.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.CaretStyle" /> enumeration values.
+        /// One of the <see cref="Enums.CaretStyle" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.CaretStyle.Line" />.
+After:
+        /// The default is <see cref="CaretStyle.Line" />.
+*/
+        /// The default is <see cref="Line" />.
         /// </returns>
         [DefaultValue(CaretStyle.Line)]
         [Category("Caret")]
@@ -3720,7 +3749,14 @@ namespace ScintillaNET
         /// <returns>The width of the caret in pixels. The default is 1 pixel.</returns>
         /// <remarks>
         /// The caret width can only be set to a value of 0, 1, 2 or 3 pixels and is only effective
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// when the <see cref="CaretStyle" /> property is set to <see cref="ScintillaNET.CaretStyle.Line" />.
+After:
+        /// when the <see cref="CaretStyle" /> property is set to <see cref="CaretStyle.Line" />.
+*/
+        /// when the <see cref="CaretStyle" /> property is set to <see cref="Line" />.
         /// </remarks>
         [DefaultValue(1)]
         [Category("Caret")]
@@ -3925,7 +3961,14 @@ namespace ScintillaNET
 
         /// <summary>
         /// Gets or sets the background color to use when indicating long lines with
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <see cref="ScintillaNET.EdgeMode.Background" />.
+After:
+        /// <see cref="EdgeMode.Background" />.
+*/
+        /// <see cref="Enums.EdgeMode.Background" />.
         /// </summary>
         /// <returns>The background Color. The default is Silver.</returns>
         [DefaultValue(typeof(Color), "Silver")]
@@ -3950,8 +3993,17 @@ namespace ScintillaNET
         /// </summary>
         /// <returns>The number of columns in a long line. The default is 0.</returns>
         /// <remarks>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// When using <see cref="ScintillaNET.EdgeMode.Line"/>, a column is defined as the width of a space character in the <see cref="Style.Default" /> style.
         /// When using <see cref="ScintillaNET.EdgeMode.Background" /> a column is equal to a character (including tabs).
+After:
+        /// When using <see cref="EdgeMode.Line"/>, a column is defined as the width of a space character in the <see cref="Style.Default" /> style.
+        /// When using <see cref="EdgeMode.Background" /> a column is equal to a character (including tabs).
+*/
+        /// When using <see cref="Enums.EdgeMode.Line"/>, a column is defined as the width of a space character in the <see cref="Style.Default" /> style.
+        /// When using <see cref="Enums.EdgeMode.Background" /> a column is equal to a character (including tabs).
         /// </remarks>
         [DefaultValue(0)]
         [Category("Long Lines")]
@@ -3973,8 +4025,15 @@ namespace ScintillaNET
         /// Gets or sets the mode for indicating long lines.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.EdgeMode" /> enumeration values.
+        /// One of the <see cref="Enums.EdgeMode" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.EdgeMode.None" />.
+After:
+        /// The default is <see cref="EdgeMode.None" />.
+*/
+        /// The default is <see cref="Enums.EdgeMode.None" />.
         /// </returns>
         [DefaultValue(EdgeMode.None)]
         [Category("Long Lines")]
@@ -4122,8 +4181,15 @@ namespace ScintillaNET
         /// Gets or sets font quality (anti-aliasing method) used to render fonts.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.FontQuality" /> enumeration values.
+        /// One of the <see cref="Enums.FontQuality" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.FontQuality.Default" />.
+After:
+        /// The default is <see cref="FontQuality.Default" />.
+*/
+        /// The default is <see cref="Enums.FontQuality.Default" />.
         /// </returns>
         [DefaultValue(FontQuality.Default)]
         [Category("Misc")]
@@ -4202,8 +4268,15 @@ namespace ScintillaNET
         /// Gets or sets the strategy used to perform styling using application idle time.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.IdleStyling" /> enumeration values.
+        /// One of the <see cref="Enums.IdleStyling" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.IdleStyling.None" />.
+After:
+        /// The default is <see cref="IdleStyling.None" />.
+*/
+        /// The default is <see cref="Enums.IdleStyling.None" />.
         /// </returns>
         [DefaultValue(IdleStyling.None)]
         [Category("Misc")]
@@ -4311,7 +4384,14 @@ namespace ScintillaNET
         /// <summary>
         /// Gets or sets the current lexer.
         /// </summary>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <returns>One of the <see cref="Lexer" /> enumeration values. The default is <see cref="ScintillaNET.Lexer.Container" />.</returns>
+After:
+        /// <returns>One of the <see cref="Lexer" /> enumeration values. The default is <see cref="Lexer.Container" />.</returns>
+*/
+        /// <returns>One of the <see cref="Lexer" /> enumeration values. The default is <see cref="Enums.Lexer.Container" />.</returns>
         [DefaultValue(Lexer.Container)]
         [Category("Lexing")]
         [Description("The current lexer.")]
@@ -4391,7 +4471,14 @@ namespace ScintillaNET
         [DefaultValue(LineEndType.Default)]
         [Category("Line Endings")]
         [Description("Line endings types interpreted by the control.")]
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         [TypeConverter(typeof(FlagsEnumTypeConverter.FlagsEnumConverter))]
+After:
+        [TypeConverter(typeof(FlagsEnumConverter))]
+*/
+        [TypeConverter(typeof(ScintillaNET.TypeConverters.FlagsEnumConverter))]
         public LineEndType LineEndTypesAllowed
         {
             get
@@ -4597,7 +4684,14 @@ namespace ScintillaNET
         /// <summary>
         /// Gets or sets the behavior when pasting text into multiple selections.
         /// </summary>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <returns>One of the <see cref="ScintillaNET.MultiPaste" /> enumeration values. The default is <see cref="ScintillaNET.MultiPaste.Once" />.</returns>
+After:
+        /// <returns>One of the <see cref="ScintillaNET.MultiPaste" /> enumeration values. The default is <see cref="MultiPaste.Once" />.</returns>
+*/
+        /// <returns>One of the <see cref="Enums.MultiPaste" /> enumeration values. The default is <see cref="Enums.MultiPaste.Once" />.</returns>
         [DefaultValue(MultiPaste.Once)]
         [Category("Multiple Selection")]
         [Description("Determines how pasted text is applied to multiple selections.")]
@@ -4866,7 +4960,14 @@ namespace ScintillaNET
         /// <summary>
         /// Gets or sets the search flags used when searching text.
         /// </summary>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <returns>A bitwise combination of <see cref="ScintillaNET.SearchFlags" /> values. The default is <see cref="ScintillaNET.SearchFlags.None" />.</returns>
+After:
+        /// <returns>A bitwise combination of <see cref="ScintillaNET.SearchFlags" /> values. The default is <see cref="SearchFlags.None" />.</returns>
+*/
+        /// <returns>A bitwise combination of <see cref="Enums.SearchFlags" /> values. The default is <see cref="Enums.SearchFlags.None" />.</returns>
         /// <seealso cref="SearchInTarget" />
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -4994,9 +5095,23 @@ namespace ScintillaNET
         /// </summary>
         /// <returns>
         /// One of the <see cref="Status" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.Status.Ok" />.
+After:
+        /// The default is <see cref="Status.Ok" />.
+*/
+        /// The default is <see cref="Enums.Status.Ok" />.
         /// </returns>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// <remarks>The status can be reset by setting the property to <see cref="ScintillaNET.Status.Ok" />.</remarks>
+After:
+        /// <remarks>The status can be reset by setting the property to <see cref="Status.Ok" />.</remarks>
+*/
+        /// <remarks>The status can be reset by setting the property to <see cref="Enums.Status.Ok" />.</remarks>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Status Status
@@ -5024,18 +5139,18 @@ namespace ScintillaNET
         /// Gets or sets how tab characters are represented when whitespace is visible.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.TabDrawMode" /> enumeration values.
+        /// One of the <see cref="Enums.TabDrawMode" /> enumeration values.
         /// The default is <see cref="TabDrawMode.LongArrow" />.
         /// </returns>
         /// <seealso cref="ViewWhitespace" />
-        [DefaultValue(TabDrawMode.LongArrow)]
+        [DefaultValue(Enums.TabDrawMode.LongArrow)]
         [Category("Whitespace")]
         [Description("Style of visible tab characters.")]
-        public TabDrawMode TabDrawMode
+        public Enums.TabDrawMode TabDrawMode
         {
             get
             {
-                return (TabDrawMode)DirectMessage(NativeMethods.SCI_GETTABDRAWMODE);
+                return (Enums.TabDrawMode)DirectMessage(NativeMethods.SCI_GETTABDRAWMODE);
             }
             set
             {
@@ -5144,7 +5259,14 @@ namespace ScintillaNET
         /// </summary>
         /// <returns>
         /// One of the <see cref="Technology" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.Technology.Default" />.
+After:
+        /// The default is <see cref="Technology.Default" />.
+*/
+        /// The default is <see cref="Enums.Technology.Default" />.
         /// </returns>
         [DefaultValue(Technology.Default)]
         [Category("Misc")]
@@ -5300,7 +5422,14 @@ namespace ScintillaNET
         [DefaultValue(VirtualSpace.None)]
         [Category("Behavior")]
         [Description("Options for allowing the caret to move beyond the end of each line.")]
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         [TypeConverter(typeof(FlagsEnumTypeConverter.FlagsEnumConverter))]
+After:
+        [TypeConverter(typeof(FlagsEnumConverter))]
+*/
+        [TypeConverter(typeof(ScintillaNET.TypeConverters.FlagsEnumConverter))]
         public VirtualSpace VirtualSpaceOptions
         {
             get
@@ -5392,8 +5521,15 @@ namespace ScintillaNET
         /// Gets or sets the line wrapping indent mode.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.WrapIndentMode" /> enumeration values.
+        /// One of the <see cref="Enums.WrapIndentMode" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.WrapIndentMode.Fixed" />.
+After:
+        /// The default is <see cref="WrapIndentMode.Fixed" />.
+*/
+        /// The default is <see cref="Enums.WrapIndentMode.Fixed" />.
         /// </returns>
         [DefaultValue(WrapIndentMode.Fixed)]
         [Category("Line Wrapping")]
@@ -5415,8 +5551,15 @@ namespace ScintillaNET
         /// Gets or sets the line wrapping mode.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.WrapMode" /> enumeration values.
+        /// One of the <see cref="Enums.WrapMode" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.WrapMode.None" />.
+After:
+        /// The default is <see cref="WrapMode.None" />.
+*/
+        /// The default is <see cref="Enums.WrapMode.None" />.
         /// </returns>
         [DefaultValue(WrapMode.None)]
         [Category("Line Wrapping")]
@@ -5439,7 +5582,14 @@ namespace ScintillaNET
         /// </summary>
         /// <returns>The indented size of wrapped sublines measured in pixels. The default is 0.</returns>
         /// <remarks>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// Setting <see cref="WrapVisualFlags" /> to <see cref="ScintillaNET.WrapVisualFlags.Start" /> will add an
+After:
+        /// Setting <see cref="WrapVisualFlags" /> to <see cref="WrapVisualFlags.Start" /> will add an
+*/
+        /// Setting <see cref="WrapVisualFlags" /> to <see cref="Enums.WrapVisualFlags.Start" /> will add an
         /// additional 1 pixel to the value specified.
         /// </remarks>
         [DefaultValue(0)]
@@ -5462,13 +5612,27 @@ namespace ScintillaNET
         /// Gets or sets the wrap visual flags.
         /// </summary>
         /// <returns>
-        /// A bitwise combination of the <see cref="ScintillaNET.WrapVisualFlags" /> enumeration.
+        /// A bitwise combination of the <see cref="Enums.WrapVisualFlags" /> enumeration.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.WrapVisualFlags.None" />.
+After:
+        /// The default is <see cref="WrapVisualFlags.None" />.
+*/
+        /// The default is <see cref="Enums.WrapVisualFlags.None" />.
         /// </returns>
         [DefaultValue(WrapVisualFlags.None)]
         [Category("Line Wrapping")]
         [Description("The visual indicator displayed on a wrapped line.")]
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         [TypeConverter(typeof(FlagsEnumTypeConverter.FlagsEnumConverter))]
+After:
+        [TypeConverter(typeof(FlagsEnumConverter))]
+*/
+        [TypeConverter(typeof(ScintillaNET.TypeConverters.FlagsEnumConverter))]
         public WrapVisualFlags WrapVisualFlags
         {
             get
@@ -5486,8 +5650,15 @@ namespace ScintillaNET
         /// Gets or sets additional location options when displaying wrap visual flags.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.WrapVisualFlagLocation" /> enumeration values.
+        /// One of the <see cref="Enums.WrapVisualFlagLocation" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.WrapVisualFlagLocation.Default" />.
+After:
+        /// The default is <see cref="WrapVisualFlagLocation.Default" />.
+*/
+        /// The default is <see cref="Enums.WrapVisualFlagLocation.Default" />.
         /// </returns>
         [DefaultValue(WrapVisualFlagLocation.Default)]
         [Category("Line Wrapping")]
@@ -5555,7 +5726,7 @@ namespace ScintillaNET
         /// </summary>
         [Category("Notifications")]
         [Description("Occurs when an autocompletion list is cancelled.")]
-        public event EventHandler<EventArgs> AutoCCancelled
+        public event EventHandler<System.EventArgs> AutoCCancelled
         {
             add
             {
@@ -5572,7 +5743,7 @@ namespace ScintillaNET
         /// </summary>
         [Category("Notifications")]
         [Description("Occurs when the user deletes a character while an autocompletion list is active.")]
-        public event EventHandler<EventArgs> AutoCCharDeleted
+        public event EventHandler<System.EventArgs> AutoCCharDeleted
         {
             add
             {
@@ -6038,7 +6209,7 @@ namespace ScintillaNET
         /// <seealso cref="ReadOnly" />
         [Category("Notifications")]
         [Description("Occurs when an attempt is made to change text in read-only mode.")]
-        public event EventHandler<EventArgs> ModifyAttempt
+        public event EventHandler<System.EventArgs> ModifyAttempt
         {
             add
             {
@@ -6102,7 +6273,7 @@ namespace ScintillaNET
         /// </summary>
         [Category("Notifications")]
         [Description("Occurs when the control is painted.")]
-        public event EventHandler<EventArgs> Painted
+        public event EventHandler<System.EventArgs> Painted
         {
             add
             {
@@ -6122,7 +6293,7 @@ namespace ScintillaNET
         /// <seealso cref="SavePointReached" />
         [Category("Notifications")]
         [Description("Occurs when a save point is left and the document becomes dirty.")]
-        public event EventHandler<EventArgs> SavePointLeft
+        public event EventHandler<System.EventArgs> SavePointLeft
         {
             add
             {
@@ -6142,7 +6313,7 @@ namespace ScintillaNET
         /// <seealso cref="SavePointLeft" />
         [Category("Notifications")]
         [Description("Occurs when a save point is reached and the document is no longer dirty.")]
-        public event EventHandler<EventArgs> SavePointReached
+        public event EventHandler<System.EventArgs> SavePointReached
         {
             add
             {
@@ -6158,7 +6329,14 @@ namespace ScintillaNET
         /// Occurs when the control is about to display or print text and requires styling.
         /// </summary>
         /// <remarks>
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// This event is only raised when <see cref="Lexer" /> is set to <see cref="ScintillaNET.Lexer.Container" />.
+After:
+        /// This event is only raised when <see cref="Lexer" /> is set to <see cref="Lexer.Container" />.
+*/
+        /// This event is only raised when <see cref="Lexer" /> is set to <see cref="Enums.Lexer.Container" />.
         /// The last position styled correctly can be determined by calling <see cref="GetEndStyled" />.
         /// </remarks>
         /// <seealso cref="GetEndStyled" />
@@ -6199,7 +6377,7 @@ namespace ScintillaNET
         /// </summary>
         [Category("Notifications")]
         [Description("Occurs when the control is zoomed.")]
-        public event EventHandler<EventArgs> ZoomChanged
+        public event EventHandler<System.EventArgs> ZoomChanged
         {
             add
             {

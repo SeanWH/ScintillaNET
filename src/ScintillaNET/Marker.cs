@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using ScintillaNET.Collections;
+using ScintillaNET.Enums;
 
 namespace ScintillaNET
 {
@@ -133,8 +135,15 @@ namespace ScintillaNET
         /// Gets or sets the marker symbol.
         /// </summary>
         /// <returns>
-        /// One of the <see cref="ScintillaNET.MarkerSymbol" /> enumeration values.
+        /// One of the <see cref="Enums.MarkerSymbol" /> enumeration values.
+
+/* Unmerged change from project 'ScintillaNET (net6.0-windows)'
+Before:
         /// The default is <see cref="ScintillaNET.MarkerSymbol.Circle" />.
+After:
+        /// The default is <see cref="MarkerSymbol.Circle" />.
+*/
+        /// The default is <see cref="Enums.MarkerSymbol.Circle" />.
         /// </returns>
         public MarkerSymbol Symbol
         {
